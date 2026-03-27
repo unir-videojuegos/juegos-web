@@ -8,18 +8,15 @@ Para crear juegos en Phaser utilizaremos las siguientes herramientas:
 
 * La extensión [Live Preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) de VSCode para ejecutar un servidor web de prueba y visualizar nuestros juegos en el editor o en el navegador web.
 
-* [Phaser v3.88.2](https://phaser.io/download/stable) que es la versión más reciente al momento de crear este documento.
+* [Phaser v3.90.0](https://phaser.io/download/stable) que es la versión más reciente al momento de crear este documento.
 
 ## Comentarios Sobre la Versión de Phaser a Utilizar
 
 Si bien es posible descargar Phaser y tenerlo como un fichero local, para los ejemplos de este repositorio utilizaremos la versión "reducida (minified)" disponible a través de los servidores web provistos por los desarrolladores de esta librería en las siguientes URL:
 
-```text
+* <https://cdnjs.cloudflare.com/ajax/libs/phaser/3.90.0/phaser.min.js>
 
-https://cdnjs.cloudflare.com/ajax/libs/phaser/3.88.2/phaser.min.js
-
-https://cdn.jsdelivr.net/npm/phaser@v3.88.2/dist/phaser.min.js
-```
+* <https://cdn.jsdelivr.net/npm/phaser@v3.90.0/dist/phaser.min.js>
 
 ## Código Visto en Clase
 
