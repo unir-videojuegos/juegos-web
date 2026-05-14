@@ -57,23 +57,25 @@ export default class EscenaBase extends Phaser.Scene {
 
     // Reiniciar puntos y tiempo cada vez que inicia la escena
     this.puntos = 0;
-    this.tiempo = 30; // Tiempo total en segundos
+    this.tiempo = 5; // Tiempo total en segundos
 
     // Mostrar texto en pantalla
     this.txtPuntos = this.add.text(20, 20, 'Puntos: 0', { fontSize: '20px', fill: '#fff' });
     this.txtTiempo = this.add.text(20, 50, 'Tiempo: 30', { fontSize: '20px', fill: '#fff' });
 
     // Crear temporizador que actualiza el tiempo cada segundo
-    this.temporizador = this.time.addEvent({
-      delay: 1000,
-      callback: () => {
-        this.tiempo--;
-        this.txtTiempo.setText('Tiempo: ' + this.tiempo);
-        if (this.tiempo <= 0) this.finDelJuego();
-      },
-      callbackScope: this,
-      loop: true
-    });
+    this.temporizador = this.time.addEvent(
+      {
+        delay: 1000,
+        callback: () => {
+          this.tiempo--;
+          this.txtTiempo.setText('Tiempo: ' + this.tiempo);
+          if (this.tiempo <= 0) this.finDelJuego();
+        },
+        callbackScope: this,
+        loop: true
+      }
+    );
 
     // Crear botón para reiniciar el juego (oculto al inicio)
     this.botonReiniciar = this.add.text(500, 300, 'Reiniciar (ENTER)', {
