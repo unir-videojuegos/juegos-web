@@ -2,21 +2,14 @@
 import { inicializarEstadoPartida, procesarReinicioSiCorresponde } from "./estadoPartida.js";
 import { crearEnemigos, actualizarEnemigos } from "./enemigosPartida.js";
 import { crearGemas } from "./gemasPartida.js";
-import { crearUI } from "./uiPartida.js";
+import { crearUI, actualizarTextoPuntos, actualizarTextoVidas } from "./uiPartida.js";
 
 // Escena del primer nivel: coordina el mapa y los sistemas de partida.
 export default class EscenaNivel1 extends Phaser.Scene {
-  /**
-   * Constructor de la escena.
-   * Registramos la clave para que Phaser pueda iniciarla.
-   */
   constructor() {
     super("EscenaNivel1");
   }
 
-  /**
-   * Precarga de recursos.
-   */
   preload() {
     this.load.image("tiles", "assets/tilemap_packed.png");
     this.load.tilemapTiledJSON("nivel1", "assets/nivel1.json");
@@ -28,17 +21,11 @@ export default class EscenaNivel1 extends Phaser.Scene {
     this.load.image("vida", "assets/vida.png");
   }
 
-  /**
-   * Creación de la escena.
-   */
   create() {
     const mapa = this.make.tilemap({ key: "nivel1" });
     const tileset = mapa.addTilesetImage("tilemap_packed", "tiles", 18, 18, 1, 2);
 
-    // Capa decorativa opcional sin colisiones.
     this.escenografia = mapa.createLayer("escenografia", tileset, 0, 0);
-
-    // Capa jugable con colisión.
     this.terreno = mapa.createLayer("nivel1", tileset, 0, 0);
     this.terreno.setCollisionByExclusion([-1]);
 
@@ -58,13 +45,16 @@ export default class EscenaNivel1 extends Phaser.Scene {
     this.cameras.main.startFollow(this.jugador, true, 0.08, 0.08);
 
     this.teclaReiniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+
+    // UI conectada desde módulo externo.
     crearUI(this);
   }
 
-  /**
-   * Bucle principal de la escena.
-   */
   update() {
+    // Actualizamos la UI en cada fotograma desde las utilidades.
+    actualizarTextoPuntos(this);
+    actualizarTextoVidas(this);
+
     if (procesarReinicioSiCorresponde(this)) {
       return;
     }

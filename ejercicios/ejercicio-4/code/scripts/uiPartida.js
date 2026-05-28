@@ -1,44 +1,43 @@
-﻿// Utilidades de interfaz para la partida.
+﻿// Utilidades de interfaz de la partida.
 
 /**
- * Crea textos básicos de interfaz en la escena.
+ * Crea textos de puntos y vidas, y los guarda en la escena.
  * @param {Phaser.Scene} scene Escena actual.
  */
 export function crearUI(scene) {
-  scene.uiPuntos = scene.add.text(10, 10, "", {
-    fontSize: "24px",
+  scene.txtPuntos = scene.add.text(20, 20, "Puntos: 0", {
+    fontSize: "20px",
     fill: "#fff",
   });
-  scene.uiPuntos.setScrollFactor(0);
+  scene.txtPuntos.setScrollFactor(0).setDepth(10000);
 
-  scene.uiVidas = scene.add.text(10, 40, "", {
-    fontSize: "24px",
+  scene.txtVidas = scene.add.text(20, 45, "Vidas: 5", {
+    fontSize: "20px",
     fill: "#fff",
   });
-  scene.uiVidas.setScrollFactor(0);
-
-  scene.uiEstado = scene.add.text(10, 70, "", {
-    fontSize: "22px",
-    fill: "#fff",
-  });
-  scene.uiEstado.setScrollFactor(0);
-
-  actualizarTextoPuntos(scene);
-  actualizarTextoVidas(scene);
+  scene.txtVidas.setScrollFactor(0).setDepth(10000);
 }
 
 /**
- * Refresca el contador de puntos.
+ * Actualiza el texto de puntos.
  * @param {Phaser.Scene} scene Escena actual.
  */
 export function actualizarTextoPuntos(scene) {
-  scene.uiPuntos.setText(`Puntos: ${scene.puntos} / ${scene.puntosParaGanar}`);
+  if (!scene.txtPuntos) {
+    return;
+  }
+
+  scene.txtPuntos.setText(`Puntos: ${scene.puntos}`);
 }
 
 /**
- * Refresca el contador de vidas.
+ * Actualiza el texto de vidas.
  * @param {Phaser.Scene} scene Escena actual.
  */
 export function actualizarTextoVidas(scene) {
-  scene.uiVidas.setText(`Vidas: ${scene.vidas}`);
+  if (!scene.txtVidas) {
+    return;
+  }
+
+  scene.txtVidas.setText(`Vidas: ${scene.vidas}`);
 }
